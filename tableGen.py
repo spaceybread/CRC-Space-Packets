@@ -1,6 +1,6 @@
-def make(poly):
+def makeBig(poly):
     bigTable = [0] * 256
-    crc = 32768
+    crc = 32768 # needs to be changed, idk what this is actually supposed to be
 
 
     i = 1
@@ -19,10 +19,25 @@ def make(poly):
             print()
         print(hex(bigTable[i]), end= " ")
 
-for i in range(600000, 655370):
-    make(i)
-    print()
-    print("=" * 64, " ", end = "")
-    print(i)
-    print()
-    input()
+def makeSmall(poly):
+    smallTable = [0] * 256
+    crc = 1 # I think this one is just 1 regardless of context
+    
+    i = 128
+    while i > 0:
+        if crc & 1:
+            crc = (crc >> 1) ^ poly
+        else:
+            crc = crc >> 1
+        
+        for j in range(0, 255, 2):
+            smallTable[i ^ j] = crc ^ smallTable[j]
+        
+        i = i >> 1
+    
+    for i in range(256):
+        if i % 16 == 0:
+            print()
+        print(hex(smallTable[i]), end= " ")
+
+makeSmall(256)
