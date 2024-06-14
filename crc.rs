@@ -4,7 +4,6 @@ use std::env;
 
 fn table() -> [u32; 256] {
     let mut table = [0; 256];
-
     for i in 0..256 {
         table[i as usize] = (0..8).fold(i as u32, |acc, _| {
             match acc & 1 {
@@ -23,7 +22,8 @@ fn hash(buf: &str, table: [u32; 256]) -> u32 {
 }
 
 fn readFile() -> Vec<u8> {
-    let contents: Vec<u8> = fs::read("packetTest").expect("File read failure!");
+    let contents: Vec<u8> = fs::read("packetWithouCS").expect("File read failure!");
+    println!("File read!");
     return contents;
 }
 
