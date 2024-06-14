@@ -11,20 +11,18 @@ def table():
         a.append(k)
     return a
 
-def hash(buf):
+def hash(buf, table):
     crc = 0 ^ 0xffffffff
     for k in buf:
         crc = (crc >> 8) ^ table[(crc & 0xff) ^ k]
     return crc ^ 0xffffffff
 
-table = table()
-
-os.system('cp packet991 processing')
+os.system('cp packet994 processing')
 
 file = open('processing', 'br+')
 file.seek(-4, os.SEEK_END)
 out = file.read()
-outIn = int.from_bytes(out, byteorder='little')
+outIn = int.from_bytes(out, byteorder='big')
 file.close()
 
 file = open('processing', 'br+')
@@ -36,4 +34,5 @@ file = open('processing', 'br+')
 data = file.read()
 file.close()
 
-print(hex(hash(data)), int(hex(hash(data)), 16) == 1469400536, outIn)
+table = table()
+print(hex(hash(data, table)), int(hex(hash(data, table)), 16) == outIn)
