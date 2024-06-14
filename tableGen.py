@@ -40,4 +40,4 @@ def makeSmall(poly):
             print()
         print(hex(smallTable[i]), end= " ")
 
-makeSmall(256)
+makeBig(4374732215)
