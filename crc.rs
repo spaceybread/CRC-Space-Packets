@@ -1,5 +1,6 @@
 use std::fs::File;
-use std::io::Read;
+use std::fs;
+use std::env;
 
 fn table() -> [u32; 256] {
     let mut table = [0; 256];
@@ -12,7 +13,6 @@ fn table() -> [u32; 256] {
             }
         });
     }
-
     return table;
 }
 
@@ -22,15 +22,15 @@ fn hash(buf: &str, table: [u32; 256]) -> u32 {
     })
 }
 
-fn readFile() {
-
+fn readFile() -> Vec<u8> {
+    let contents: Vec<u8> = fs::read("packetTest").expect("File read failure!");
+    return contents;
 }
 
 
 fn main() {
     let r = readFile();
-    //println!("{}", r);
 
     let table = table();
-    println!("{:x}", hash("This is a test string!", table));
+    //println!("{:x}", hash(&r, table));
 }
