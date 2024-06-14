@@ -1,3 +1,5 @@
+import os
+
 def table():
     a = []
     for i in range(256):
@@ -17,5 +19,13 @@ def hash(buf):
     
 
 table = table()
-file = open('packetWithouCS', 'rb').read()
-print(hex(hash(file)), int(hex(hash(file)), 16) == 1557394236)
+file = open('packet990', 'br+')
+file.seek(-4, os.SEEK_END)
+out = file.read()
+file.truncate()
+file.close()
+file = open('packet990', 'rb')
+data = file.read()
+
+print(hex(hash(data)), int(hex(hash(data)), 16) == 1557394236)
+print(out)
