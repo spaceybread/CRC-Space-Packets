@@ -17,22 +17,31 @@ def hash(buf, table):
         crc = (crc >> 8) ^ table[(crc & 0xff) ^ k]
     return crc ^ 0xffffffff
 
-os.system('cp packet994 processing')
+def decode(fileName):
+    command = "cp " + fileName + " processing"
+    os.system(command)
 
-file = open('processing', 'br+')
-file.seek(-4, os.SEEK_END)
-out = file.read()
-outIn = int.from_bytes(out, byteorder='big')
-file.close()
+    file = open('processing', 'br+')
+    file.seek(-4, os.SEEK_END)
+    out = file.read()
+    outIn = int.from_bytes(out, byteorder='big')
+    file.close()
 
-file = open('processing', 'br+')
-file.seek(-4, os.SEEK_END)
-file.truncate()
-file.close()
+    file = open('processing', 'br+')
+    file.seek(-4, os.SEEK_END)
+    file.truncate()
+    file.close()
 
-file = open('processing', 'br+')
-data = file.read()
-file.close()
+    file = open('processing', 'br+')
+    data = file.read()
+    file.close()
 
-table = table()
-print(hex(hash(data, table)), int(hex(hash(data, table)), 16) == outIn)
+    tab = table()
+    print(hex(hash(data, tab)), int(hex(hash(data, tab)), 16) == outIn)
+
+if __name__ == "__main__":
+    
+    samples = ['packet991', 'packet992', 'packet993', 'packet994', 'packet995', 'packet996', 'packet997', 'packet998', 'packet999']
+
+    for sample in samples:
+        decode('samples/' + sample)
