@@ -1,1 +1,1 @@
-polynomial = $4374732215_{10}$; one might prefer to read it as $100000100110000010001110110110111_2$ or $104C11DB7_{16}$
+CRC-32 check for space packets; computes a checksum and compares against the expected value
