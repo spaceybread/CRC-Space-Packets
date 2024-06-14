@@ -19,13 +19,13 @@ def hash(buf):
     
 
 table = table()
-file = open('packet990', 'br+')
+file = open('packet991', 'br+')
 file.seek(-4, os.SEEK_END)
-out = file.read()
 file.truncate()
 file.close()
-file = open('packet990', 'rb')
-data = file.read()
 
-print(hex(hash(data)), int(hex(hash(data)), 16) == 1557394236)
-print(out)
+file = open('packet991', 'br+')
+data = file.read()
+file.close()
+
+print(hex(hash(data)), int(hex(hash(data)), 16) == 1469400536)
