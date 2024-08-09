@@ -43,7 +43,11 @@ def decode(fileName, tab):
     file.close()
     
     # For debugging, get the checksum and if it passes
-    print(hex(hash(data, tab)), int(hex(hash(data, tab)), 16) == outIn)
+    
+    if int(hex(hash(data, tab)), 16) != outIn:
+        print("Replace checksum with:", hex(hash(data, tab)))
+    else:
+        print(hex(hash(data, tab)), int(hex(hash(data, tab)), 16), int(hex(hash(data, tab)), 16) == outIn)
     
     # For future use, if it returns False, the packet fails the data integrity check
     # True otherwise
@@ -52,7 +56,7 @@ def decode(fileName, tab):
 if __name__ == "__main__":
     
     # This is just for testing on the few packets that I have
-    samples = ['packet991', 'packet992', 'packet993', 'packet994', 'packet995', 'packet996', 'packet997', 'packet998', 'packet999']
+    samples = ['packet991', 'packet992', 'packet993', 'packet994', 'packet995', 'packet996', 'packet997', 'packet998', 'packet999', 'packetFFF', 'packetGGG']
     
     tab = table()
     for sample in samples:
